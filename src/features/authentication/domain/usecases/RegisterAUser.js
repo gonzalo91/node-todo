@@ -1,3 +1,5 @@
+const User = require('../../domain/entities/User')
+
 
 
 module.exports =  class RegisterAUser {
@@ -6,15 +8,27 @@ module.exports =  class RegisterAUser {
         this.authenticationRepository = authenticationRepository();
     }
 
-    async call(name, username, password){
+    async call(name, email, password){
+        const userEntity = new User({ name, email, password } )
+        try{
+            
+            const b = await this.authenticationRepository.createUser(userEntity);
 
-        console.log(this.authenticationRepository)
-        if(!name || !username || ! password){
-            throw new Error('All fields are required');
+            return Promise.resolve(b)
+            
+        }catch(e){
+            return Promise.reject({
+                "errors": [
+                    {
+                        "value": "email",
+                        "msg": "Email Already Registered",
+                        "param": "password",
+                        "location": "body"
+                    }
+                ]
+            })
         }
-
-        this.authenticationRepository.createUser(name, username, password);
-
+                
     }
 
 }

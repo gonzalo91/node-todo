@@ -8,29 +8,8 @@ module.exports = class UserMongoDbDataSource {
         user
     ){
         
-        this.userModel.find((err, data)=>{
-            if(err){
-                console.log(err)
-            }else{
-                console.log(data)
-            }
-        } )
+        return this.userModel.create(user)
 
-        // this.userModel.create(user, (err, data)=>{
-        //     if(err){
-        //         console.log(err)
-        //     }else{
-        //         console.log(data)
-        //     }
-        // } )
-        // this.userModel.create(user, (err, data) =>{
-        //     if(err){
-        //         console.log(error)
-        //     }else{
-        //         console.log(data);
-        //     }
-        // })
-        
     }
 
 

@@ -1,4 +1,5 @@
 
+
 module.exports = class AuthenticationRepositoryImpl {
 
     constructor(
@@ -7,20 +8,17 @@ module.exports = class AuthenticationRepositoryImpl {
         this._userMongoDbDatasource = userMongoDbDatasource();
     }
     
-    createUser( name , username, password){
-        const user = {
-            'name' : name,
-            'username' : username,
-            'password' : password,
-        }
+    createUser( userEntity ){
 
-        this._userMongoDbDatasource.create(
+        let user = {
+            'name': userEntity.name,
+            'email': userEntity.email,
+            'password': userEntity.password,
+        }        
+
+        return this._userMongoDbDatasource.create(
             user
-        )
-
-
-
-
+        )   
     }
     
     

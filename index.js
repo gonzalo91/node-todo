@@ -1,7 +1,7 @@
 const bodyParser = require('body-parser'),
       express = require('express'),
       cors    = require('cors'),
-      mongoose = require('mongoose');      
+      mongoose = require('mongoose');
 
 const dbConfig = require('./src/config/database');
 
@@ -16,6 +16,7 @@ mongoose.connect(dbConfig.db, {
 }).then( _ => {
     // support parsing of application/json type post data
     app.use(bodyParser.json());
+
 
     //support parsing of application/x-www-form-urlencoded post data
     app.use(bodyParser.urlencoded({ extended: true }));
