@@ -8,6 +8,7 @@ const UserSchema = require('./features/authentication/data/models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserResponse = require('./features/authentication/presentation/responses/UserResponse');
+const LoginAUser = require('./features/authentication/domain/usecases/LoginAUser');
 
 let container = new ContainerBuilder();
 
@@ -25,6 +26,15 @@ container.register('usecase.RegisterAUser', RegisterAUser)
     .addArgument(
         () => bcrypt
     );
+
+container.register('usecase.LoginAUser', LoginAUser)
+    .addArgument(
+        () => container.get('repository.Authentication')
+    )
+    .addArgument(
+        () => bcrypt
+    );
+
 
 container.register('response.UserResponse', UserResponse)
     .addArgument(

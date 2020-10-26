@@ -15,7 +15,10 @@ const authRouter = () => {
     ]), controller.registerUser)
 
 
-    router.post('/login', controller.getToken)
+    router.post('/login', validate([
+        body('email').isEmail(),
+        body('password').isLength({ min: 8 }),
+    ]), controller.login)
 
     return router;
 };

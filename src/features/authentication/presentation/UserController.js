@@ -18,14 +18,21 @@ module.exports = () => {
         }
     }
 
-    const getToken = (req, res, next) => {
+    const login = async(req, res, next) => {
 
+        try {
 
-        console.log(d_i.singleton.get('usecase.RegisterAUser'));
+            const user = await d_i.singleton.get('usecase.LoginAUser')
+                .call(req.body.email, req.body.password)
 
-        //d_i.singleton.get('usecase.RegisterAUser').call('hola', 'adios', 'bonjour')
-        res.json({ 'hola': 'adios' })
+            const userResponse = await d_i.singleton.get('response.UserResponse').json(user);
+
+            res.json(userResponse)
+        } catch (e) {
+            res.status(400).json(e)
+        }
+
     }
 
-    return { registerUser, getToken }
+    return { registerUser, login }
 }
