@@ -1,14 +1,14 @@
 const express = require('express');
 const TaskController = require('./TaskController');
 const { body, } = require('express-validator')
-const { validate } = require('../../../app/helpers');
+const { validator } = require('../../../framework/middleware/validator');
 
 const taskRouter = () => {
     const router = express.Router();
 
     const controller = TaskController();
 
-    router.put('/create', validate([
+    router.put('/create', validator([
         body('name').isLength({ min: 3 }),
     ]), controller.create)
 
