@@ -25,9 +25,8 @@ mongoose.connect(dbConfig.db, {
 
     app.use('/', routes())
 
-
     app.listen(9000, () => {
-        console.log('Example app listening on port 8000!')
+        console.log('Example app listening on port 9000!')
     });
 
 }, e => {
