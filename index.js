@@ -3,6 +3,8 @@ const bodyParser = require('body-parser'),
     cors = require('cors'),
     mongoose = require('mongoose');
 
+require('dotenv').config();
+
 const dbConfig = require('./src/config/database');
 
 const routes = require('./src/framework/routes');
