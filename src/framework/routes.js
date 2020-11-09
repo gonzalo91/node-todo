@@ -1,7 +1,7 @@
 const { response } = require('express');
 const express = require('express');
-authentication = require('../features/authentication/presentation/routes');
-
+const authentication = require('../features/authentication/presentation/routes');
+const tasks = require('../features/tasks/presentation/routes');
 const expressValidator = require('express-validator');
 
 const authMiddleware = require('./middleware/auth');
@@ -12,12 +12,8 @@ const apiRouter = () => {
     const authenticationRouter = authentication();
     routes.use('/auth', authenticationRouter);
 
-    routes.get('/isLogged', authMiddleware, async(req, res) => {
-
-        console.log(req.user);
-        res.json(req.user);
-    });
-
+    const tasksRouter = tasks();
+    routes.use('/tasks', authMiddleware, tasksRouter);
 
 
     return routes;

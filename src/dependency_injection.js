@@ -9,9 +9,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserResponse = require('./features/authentication/presentation/responses/UserResponse');
 const LoginAUser = require('./features/authentication/domain/usecases/LoginAUser');
-
+const TaskRepositoryImpl = require('./features/tasks/data/repositories/TaskRepositoryImpl');
 let container = new ContainerBuilder();
 
+container.register('repository.Task', TaskRepositoryImpl)
 
 container.register('datasource.UserMongoDbDataSource', UserMongoDbDataSource)
     .addArgument(() => UserSchema);
