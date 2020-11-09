@@ -10,7 +10,7 @@ module.exports = async(req, res, next) => {
 
     try {
 
-        user = await jwt.verify(token, '12345')
+        user = await jwt.verify(token, process.env.JWT_SECRET)
         req.user = user
         next();
 

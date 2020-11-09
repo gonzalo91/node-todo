@@ -1,3 +1,3 @@
 module.exports = {
-    db : 'mongodb://localhost:27017/todo',
+    db: `mongodb://${process.env.DB_HOST}/${process.env.DB_USER}`
 }

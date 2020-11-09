@@ -13,7 +13,7 @@ module.exports = class UserResponse {
         json.email = user.email;
 
         try {
-            json.jwt = await this.jwtLibrary.sign(json, '12345', { 'expiresIn': '1h' });
+            json.jwt = await this.jwtLibrary.sign(json, process.env.JWT_SECRET, { 'expiresIn': '1h' });
         } catch (e) {
             throw e;
         }
